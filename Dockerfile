@@ -1,4 +1,4 @@
-FROM rust:1.75-bookworm as build
+FROM --platform=$TARGETPLATFORM rust:1.75-bookworm as build
 
 RUN apt-get install -y bash
 ENV A=b
