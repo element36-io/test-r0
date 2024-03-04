@@ -4,10 +4,10 @@ set -e
 # Define the GitHub token to get rid of binstall warning to rule this out as cause for error
 if GITHUB_TOKEN=$(gh auth token); then
     # Build the Docker image, passing the GitHub token as a build argument
-    docker buildx build . --progress=plain --build-arg GITHUB_TOKEN="$GITHUB_TOKEN"
+    docker buildx build . --build-arg GITHUB_TOKEN="$GITHUB_TOKEN"
 else
     # Build the Docker image without the GitHub token
-    docker buildx build . --progress=plain
+    docker buildx build . 
 fi
 # Build for amd64 - works
 #docker build --platform linux/amd64 .
