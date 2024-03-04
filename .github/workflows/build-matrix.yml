@@ -17,10 +17,10 @@ jobs:
     #       - linux/arm64
         
     steps:
-    - name: Prepare
-      run: |
-        platform=${{ matrix.platform }}
-        echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV    
+    # - name: Prepare
+    #   run: |
+    #     platform=${{ matrix.platform }}
+    #     echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV    
         
         
     - name: Check out code
@@ -30,8 +30,8 @@ jobs:
     #   uses: docker/setup-qemu-action@v3    
     -
       name: Set up Docker
-      # uses: crazy-max/ghaction-setup-docker@v3
-      uses: crazy-max/ghaction-setup-containerd@v3
+      uses: crazy-max/ghaction-setup-docker@v3
+      # uses: crazy-max/ghaction-setup-containerd@v3
 
     - name: Login to DockerHub
       uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
@@ -48,7 +48,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        platforms: ${{ matrix.platform }}
-        labels: ${{ steps.meta.outputs.labels }}
+        # platforms: ${{ matrix.platform }}
+        # labels: ${{ steps.meta.outputs.labels }}
         outputs: type=image,name=${{ env.REGISTRY_IMAGE }},name-canonical=true,push=false
 
