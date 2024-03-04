@@ -8,11 +8,14 @@ jobs:
     runs-on: macos-latest 
     permissions:
       contents: write
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - macos-latest # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     # os:
+    #     #   - macos-latest # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
+    #     platform:
+    #       - linux/arm64
+        
     steps:
     - name: Prepare
       run: |
