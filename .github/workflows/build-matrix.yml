@@ -11,10 +11,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform:
-          # - linux/amd64
-          - linux/arm64
-
+        os:
+          - macos-latest # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     steps:
     - name: Prepare
       run: |
