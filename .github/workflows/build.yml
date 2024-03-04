@@ -5,14 +5,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest 
+    runs-on: macos-latest 
     permissions:
       contents: write
     steps:
     - name: Check out code
-      uses: actions/checkout@v3
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v3    
+      uses: actions/checkout@v3 
     - name: Build Docker image (manual)
       run: ./run.sh
     - name: Set up Docker Buildx
