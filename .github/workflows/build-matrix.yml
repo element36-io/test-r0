@@ -30,7 +30,8 @@ jobs:
     #   uses: docker/setup-qemu-action@v3    
     -
       name: Set up Docker
-      uses: crazy-max/ghaction-setup-docker@v3
+      # uses: crazy-max/ghaction-setup-docker@v3
+      uses: crazy-max/ghaction-setup-containerd@v3
 
     - name: Login to DockerHub
       uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
