@@ -1,7 +1,8 @@
 name: run.sh
 
 on:
-  push
+  push:
+    branches: [ test ]
 
 jobs:
   build:

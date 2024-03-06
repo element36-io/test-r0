@@ -3,24 +3,29 @@ name: Buildx Action
 on:
   push
 
+env:
+  REGISTRY_IMAGE_NAME: risczero
+  REGISTRY_IMAGE: ${{ secrets.DOCKER_USERNAME }}/hyperfridge-r0
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   build:
     runs-on: macos-latest 
     permissions:
       contents: write
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     # os:
-    #     #   - macos-latest # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-latest # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     #     platform:
     #       - linux/arm64
         
     steps:
-    # - name: Prepare
-    #   run: |
-    #     platform=${{ matrix.platform }}
-    #     echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV    
+    - name: Prepare
+      run: |
+        platform=${{ matrix.platform }}
+        echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV    
         
         
     - name: Check out code
@@ -48,7 +53,11 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
+        load: true
+        build-args: |
+          PLATFORM=${{ matrix.platform }}
         # platforms: ${{ matrix.platform }}
         # labels: ${{ steps.meta.outputs.labels }}
         outputs: type=image,name=${{ env.REGISTRY_IMAGE }},name-canonical=true,push=false
-
+        tags: ${{ env.REGISTRY_IMAGE_NAME }}
+  
