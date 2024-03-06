@@ -21,16 +21,19 @@ RUN rustup toolchain install .
 # aarch64   on macos
 RUN ARCH=$(uname -m) && echo "Architecture: $ARCH"
 
-
 RUN cargo install cargo-binstall  --version 1.6.2 
 RUN echo $PATH && ls -la /root/.cargo/bin
+
 # without --target=aarch64-apple-darwin
 # it will look for aarch64 which is not found and thus all gets compiled
 # if removed it will compile the r0 stack and quits with same errors
-RUN cargo binstall cargo-risczero -y --version 0.19.1 --target=aarch64-apple-darwin
+RUN cargo binstall cargo-risczero -y 
+# i --version 0.19.1 
+# --target=aarch64-apple-darwin
 
 RUN echo $PATH && ls -la /root/.cargo/bin
-
+RUN apt install python3 -y
+RUN apt-get install ninja-build
 # fails with Syntax errors
 RUN cargo risczero help
 
@@ -38,6 +41,6 @@ RUN cargo risczero help
 RUN cargo risczero build-toolchain
 
 # also faisl with Syntax errors
-#RUN cargo risczero install
+# RUN cargo risczero install
 
 RUN rustup toolchain list --verbose | grep risc0
