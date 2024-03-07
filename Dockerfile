@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     git \
     pkg-config \
     libssl-dev \
-    cmake
+    cmake python3  ninja-build
 
 # Install Rust 1.75
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs   | sh -s -- -y --default-toolchain 1.75
@@ -31,11 +31,6 @@ RUN cargo binstall cargo-risczero -y
 # i --version 0.19.1 
 # --target=aarch64-apple-darwin
 
-RUN echo $PATH && ls -la /root/.cargo/bin
-RUN apt install python3 -y
-RUN apt-get install ninja-build
-# fails with Syntax errors
-RUN cargo risczero help
 
 # fails with Syntax errors
 RUN cargo risczero build-toolchain
