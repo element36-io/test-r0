@@ -11,14 +11,14 @@ env:
 
 jobs:
   build:
-    runs-on: macos-latest-large
+    runs-on: macos-13-large
     permissions:
       contents: write
     strategy:
       fail-fast: false
       matrix:
         os:
-          - macos-latest # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
+          - macos-13-large # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     #     platform:
     #       - linux/arm64
         
