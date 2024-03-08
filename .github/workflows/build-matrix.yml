@@ -1,7 +1,8 @@
 name: Buildx Action
 
 on:
-  push
+  push:
+    branches: [ test ]
 
 env:
   REGISTRY_IMAGE_NAME: risczero
