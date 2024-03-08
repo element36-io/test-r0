@@ -13,13 +13,24 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3 
       
-    -
-      name: Set up Docker
-      uses: crazy-max/ghaction-setup-docker@v3    
-      # uses: crazy-max/ghaction-setup-containerd@v3
+    # -
+    #   name: Set up Docker
+    #   uses: crazy-max/ghaction-setup-docker@v3    
+    #   # uses: crazy-max/ghaction-setup-containerd@v3
       
-    # - name: Build Docker image (manual)
-    #   run: ./run.sh
+
+    - name: Install Docker
+      run: |
+        brew install --cask docker
+
+    - name: Start Docker
+      run: |
+        # Start Docker.app if not already running
+        if ! pgrep -f Docker.app; then
+          open -a /Applications/Docker.app
+          # Wait for Docker to be ready
+          while ! docker info >/dev/null 2>&1; do sleep 1; done
+        fi
 
     - name: Build Docker image (manual)
       run: docker build -t my-docker-image .
