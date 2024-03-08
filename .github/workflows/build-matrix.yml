@@ -2,7 +2,7 @@ name: Buildx Action
 
 on:
   push:
-    branches: [ test ]
+    branches: [ main ]
 
 env:
   REGISTRY_IMAGE_NAME: risczero
@@ -11,7 +11,7 @@ env:
 
 jobs:
   build:
-    runs-on: macos-latest 
+    runs-on: macos-latest-large
     permissions:
       contents: write
     strategy:
@@ -34,10 +34,11 @@ jobs:
 
     # - name: Set up QEMU
     #   uses: docker/setup-qemu-action@v3    
-    -
-      name: Set up Docker
-      uses: crazy-max/ghaction-setup-docker@v3
-      # uses: crazy-max/ghaction-setup-containerd@v3
+
+    # -
+    #   name: Set up Docker
+    #   uses: crazy-max/ghaction-setup-docker@v3
+    #   # uses: crazy-max/ghaction-setup-containerd@v3
 
     - name: Login to DockerHub
       uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
